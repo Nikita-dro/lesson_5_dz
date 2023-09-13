@@ -22,9 +22,8 @@ def generate_students(request):
                 first_name = fake.first_name()
                 last_name = fake.last_name()
                 age = fake.random_int(min=0, max=100)
-                Students.objects.create(first_name=first_name, last_name=last_name, age=age)
-                list_students.append({'id': Students.objects.get(first_name=first_name).id, 'first_name': first_name,
-                                      'last_name': last_name, 'age': age})
+                student = Students.objects.create(first_name=first_name, last_name=last_name, age=age)
+                list_students.append({'id': student.id, 'first_name': first_name, 'last_name': last_name, 'age': age})
             return JsonResponse(list_students, safe=False)
         else:
             return HttpResponse('Error. count must be from 0 to 100')
